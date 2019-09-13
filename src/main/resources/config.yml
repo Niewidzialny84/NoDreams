@@ -1,0 +1,17 @@
+#Display of sleeping message
+doDisplayMsg: true
+#Message in form "<Player> isSleepingMsg. <12/1> playersNeeded/playerNeeded.
+isSleepingMsg: "is sleeping"
+isNotSleepingMsg: "is not sleeping"
+playersNeeded: "players needed"
+playerNeeded: "player needed"
+#Message when you skip night
+newDayMsg: "New day has come!"
+#Percentage of players needed to make a day. 100 is max means all players. 0 is min means at least 1 player;
+playersPercentage: 50
+
+#Phantoms spawning
+noPhantoms: true
+#Mob that will now drop phantom membrane when killed. Default is ENDERMAN
+#Avaible options ENDERMAN ZOMBIE SKELETON CREEPER SPIDER GHAST GUARDIAN PIG_ZOMBIE PILLAGER BLAZE DROWNED
+mobName: ENDERMAN

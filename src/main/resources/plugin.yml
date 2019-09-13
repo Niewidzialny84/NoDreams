@@ -1,0 +1,5 @@
+name: NoDream
+version: ${project.version}
+main: nodream.nodream.NoDream
+api-version: 1.13
+description: lul, mszyja
