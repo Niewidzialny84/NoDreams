@@ -2,6 +2,7 @@ package nodream.nodream;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.WorldType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -47,7 +48,7 @@ public class Sleep implements Listener {
 
     @EventHandler
     public void inBed(PlayerBedEnterEvent e) {
-        if(e.getBedEnterResult() == PlayerBedEnterEvent.BedEnterResult.OK && e.getPlayer().getWorld().getWorldType() == WorldType.NORMAL) {
+        if(e.getBedEnterResult() == PlayerBedEnterEvent.BedEnterResult.OK && e.getPlayer().getWorld().getEnvironment() == World.Environment.NORMAL) {
 
             countPlayers(e.getPlayer(),1);
 
@@ -90,7 +91,7 @@ public class Sleep implements Listener {
         int playersMax_ = 0;
 
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-            if(player.getWorld().getWorldType() == WorldType.NORMAL) {
+            if(player.getWorld().getEnvironment() == World.Environment.NORMAL) {
                 if (player.isSleeping() && p != player) playersSleeping_++;
                 playersMax_++;
             }

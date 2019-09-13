@@ -2,6 +2,7 @@ package nodream.nodream;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.WorldType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
@@ -33,7 +34,7 @@ public class Phantoms implements Listener {
     @EventHandler
     public void onSpawn(CreatureSpawnEvent e) {
         if(e.getEntityType() == EntityType.PHANTOM) {
-            if(e.getEntity().getWorld().getWorldType() == WorldType.NORMAL) {
+            if(e.getEntity().getWorld().getEnvironment() == World.Environment.NORMAL) {
                 e.getEntity().remove();
             }
         }
