@@ -16,7 +16,7 @@ public class Sleep implements Listener {
     private int playersSleeping = 0;
     private int playersMax = 0;
     private long time = 0;
-    float currentPlayersPercentage = 50;
+    float currentPlayersPercentage;
     private Plugin plugin_;
 
     //CONFIG VALUES
@@ -70,9 +70,8 @@ public class Sleep implements Listener {
 
         countPlayers(e.getPlayer(),0);
 
-        if (currentPlayersPercentage >= playersPercentage) {
+        if (currentPlayersPercentage <= playersPercentage) {
             timeTask.cancel();
-
         }
 
         if(doDisplayMsg) {
@@ -81,9 +80,8 @@ public class Sleep implements Listener {
     }
 
     private int playersNeededPercentage() {
-
         currentPlayersPercentage = ((float) playersSleeping / (float) playersMax * 100);
-        return (int)Math.ceil((currentPlayersPercentage - playersPercentage) / 100);
+        return (int)Math.ceil((currentPlayersPercentage - playersPercentage) / 100)+1;
     }
 
     private void countPlayers(Player p,int startingValue) {
@@ -99,6 +97,8 @@ public class Sleep implements Listener {
 
         playersMax = playersMax_;
         playersSleeping = playersSleeping_;
+
+        playersNeededPercentage();
     }
 
     private void displayMessage(Player p,int msgValue) {
