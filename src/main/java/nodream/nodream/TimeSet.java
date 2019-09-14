@@ -26,8 +26,10 @@ public class TimeSet extends BukkitRunnable {
             long time = p.getWorld().getTime() % 24000;
                 if (time >= 12000 && time <= 24000 && !p.getWorld().isThundering()) {
 
-                    p.getWorld().setWeatherDuration(1);
                     //System.out.println(p.getWorld().getWeatherDuration());
+                    if(p.getWorld().hasStorm()) {
+                        p.getWorld().setWeatherDuration(1);
+                    }
                     p.getWorld().setTime(p.getWorld().getTime() + (24000 - time));
 
                     newDayMsg();
