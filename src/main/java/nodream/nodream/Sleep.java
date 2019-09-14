@@ -71,7 +71,11 @@ public class Sleep implements Listener {
         countPlayers(e.getPlayer(),0);
 
         if (currentPlayersPercentage < playersPercentage) {
-            timeTask.cancel();
+            if(timeTask != null) {
+                timeTask.cancel();
+               // System.out.println("cancel");
+            }
+           // System.out.println("less");
         }
 
         if(doDisplayMsg) {
@@ -120,7 +124,9 @@ public class Sleep implements Listener {
                 case 1:
                     if(playersNeededPercentage() == 1) {
                         plugin_.getServer().broadcastMessage(c2 +p.getDisplayName()  + c+ " " + isNotSleepingMsg + " " + c2 + playersNeededPercentage() + " " + playerNeeded);
-                    } else  {
+                    } else if (playersNeededPercentage() == 0) {
+                        plugin_.getServer().broadcastMessage(c2 +p.getDisplayName() + c + " "+ isNotSleepingMsg);
+                    } else {
                         plugin_.getServer().broadcastMessage(c2 +p.getDisplayName()  + c+ " " + isNotSleepingMsg + " " + c2 + playersNeededPercentage() + " " + playersNeeded);
                     }
                     break;

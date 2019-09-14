@@ -1,6 +1,7 @@
 package nodream.nodream;
 
 import org.bukkit.ChatColor;
+import org.bukkit.WeatherType;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -24,6 +25,9 @@ public class TimeSet extends BukkitRunnable {
     public void run() {
             long time = p.getWorld().getTime() % 24000;
                 if (time >= 12000 && time <= 24000 && !p.getWorld().isThundering()) {
+
+                    p.getWorld().setWeatherDuration(1);
+                    //System.out.println(p.getWorld().getWeatherDuration());
                     p.getWorld().setTime(p.getWorld().getTime() + (24000 - time));
 
                     newDayMsg();
