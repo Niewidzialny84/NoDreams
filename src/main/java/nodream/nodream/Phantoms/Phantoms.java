@@ -1,9 +1,7 @@
-package nodream.nodream;
+package nodream.nodream.Phantoms;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.WorldType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
@@ -19,15 +17,7 @@ public class Phantoms implements Listener {
     private Plugin plugin_;
     private EntityType mobDrop;
 
-    Phantoms(Plugin plugin) {
-        if(plugin.getConfig().getBoolean("noPhantoms",true)) {
-            Bukkit.getPluginManager().registerEvents(this,plugin);
-            plugin.getLogger().info("Phantoms spawning is Disabled");
-            mobDrop =  EntityGet.getEntityTypeConfig(plugin);
-        } else {
-            plugin.getLogger().info("Phantoms spawning is Enabled");
-        }
-
+    public Phantoms(Plugin plugin) {
         plugin_ = plugin;
     }
 
@@ -44,7 +34,7 @@ public class Phantoms implements Listener {
     public void onDeath(EntityDeathEvent e) {
         if(e.getEntityType() == mobDrop) {
             if (e.getEntity().getKiller() != null) {
-                ItemStack weapon = e.getEntity().getKiller().getItemInHand();
+                ItemStack weapon = e.getEntity().getKiller().getInventory().getItemInMainHand();
 
                 int a = weapon.getEnchantmentLevel(Enchantment.LOOT_BONUS_MOBS);
 
@@ -63,6 +53,11 @@ public class Phantoms implements Listener {
                 e.getDrops().add(new ItemStack(Material.PHANTOM_MEMBRANE, 1));
             }
         }
+    }
+
+    public void setMobDrop(Plugin plugin) {
+        plugin_ = plugin;
+        mobDrop =  EntityGet.getEntityTypeConfig(plugin);
     }
 
     private int randomInt(int min,int max) {

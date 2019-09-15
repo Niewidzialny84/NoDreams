@@ -1,3 +1,5 @@
+#Default true; If set to false disables all of the sleeping features.
+enableSleeping: true
 #Display of sleeping message
 doDisplayMsg: true
 #Message in form "<Player> isSleepingMsg. <12/1> playersNeeded/playerNeeded.
@@ -10,8 +12,20 @@ newDayMsg: "New day has come!"
 #Percentage of players needed to make a day. 100 is max means all players. 0 is min means at least 1 player;
 playersPercentage: 50
 
-#Phantoms spawning
+#Phantoms spawning; Means spawns if already existing will not vanish
 noPhantoms: true
 #Mob that will now drop phantom membrane when killed. Default is ENDERMAN
 #Avaible options ENDERMAN ZOMBIE SKELETON CREEPER SPIDER GHAST GUARDIAN PIG_ZOMBIE PILLAGER BLAZE DROWNED
 mobName: ENDERMAN
+
+#Command messages
+#When finished reloading config file
+reloadMsg: "Config has been reloaded"
+valuesAre: "Values are"
+sleepingSetMsg: "Sleeping set to"
+phantomsSetMsg: "Phantoms set to"
+#Help messages
+reloadHelpMsg: "reloads plugin including config data"
+sleepingHelpMsg: "enables/disables sleeping feature"
+phantomsHelpMsg: "enables/disables phantoms spawning"
+warningHelpMsg: "Warning: Changing sleeping or phantoms will have no effect after restar/reload"

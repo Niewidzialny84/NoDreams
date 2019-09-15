@@ -1,5 +1,11 @@
-name: NoDream
+name: NoDreams
 version: ${project.version}
 main: nodream.nodream.NoDream
 api-version: 1.13
-description: lul, mszyja
+description: Better dreams and no phantoms
+
+commands:
+  nodreams:
+    permission: nodreams
+    usage: /nodreams
+    permission-message: You are not allowed to use this command.

@@ -1,7 +1,7 @@
-package nodream.nodream;
+package nodream.nodream.Sleep;
 
+import nodream.nodream.Config.NoDreamConfig;
 import org.bukkit.ChatColor;
-import org.bukkit.WeatherType;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -11,14 +11,10 @@ public class TimeSet extends BukkitRunnable {
 
     private Player p;
     private Plugin plugin_;
-    private String newDayMsg;
-    private boolean doDisplayMsg;
 
     TimeSet(Player player,Plugin plugin) {
         p = player;
         plugin_ = plugin;
-        newDayMsg = plugin.getConfig().getString("newDayMsg", "New day has come!");
-        doDisplayMsg = plugin.getConfig().getBoolean("doDisplayMsg",true);
     }
 
     @Override
@@ -47,7 +43,7 @@ public class TimeSet extends BukkitRunnable {
     }
 
     private void newDayMsg() {
-        if(doDisplayMsg) plugin_.getServer().broadcastMessage(ChatColor.DARK_AQUA + newDayMsg);
+        if(NoDreamConfig.isDoDisplayMsg()) plugin_.getServer().broadcastMessage(ChatColor.DARK_AQUA + NoDreamConfig.getNewDayMsg());
     }
 
 }
