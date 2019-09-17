@@ -23,9 +23,12 @@ public class Phantoms implements Listener {
 
     @EventHandler
     public void onSpawn(CreatureSpawnEvent e) {
-        if(e.getEntityType() == EntityType.PHANTOM) {
+        if(e.getEntityType() == EntityType.PHANTOM ) {
             if(e.getEntity().getWorld().getEnvironment() == World.Environment.NORMAL) {
                 e.getEntity().remove();
+                //e.setCancelled(true);
+                // && e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.NATURAL
+                //idk cant test dis out
             }
         }
     }
