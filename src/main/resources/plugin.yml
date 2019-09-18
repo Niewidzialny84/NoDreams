@@ -1,6 +1,6 @@
 name: NoDreams
 version: ${project.version}
-main: nodream.nodream.NoDream
+main: nodream.nodream.NoDreams
 api-version: 1.13
 description: Better dreams and no phantoms
 

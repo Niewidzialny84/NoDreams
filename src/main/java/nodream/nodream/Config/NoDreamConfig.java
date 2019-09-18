@@ -1,7 +1,7 @@
 package nodream.nodream.Config;
 
 
-import nodream.nodream.NoDream;
+import nodream.nodream.NoDreams;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 
@@ -84,7 +84,7 @@ public class NoDreamConfig {
     public static void loadConfig(Plugin plugin) {
         config = plugin.getConfig();
         load(config);
-        ((NoDream)plugin).RegisterEvent();
+        ((NoDreams)plugin).RegisterEvent();
     }
 
     public static boolean isEnableSleeping() {

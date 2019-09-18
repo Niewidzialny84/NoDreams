@@ -1,11 +1,10 @@
 package nodream.nodream.Config;
 
-import nodream.nodream.NoDream;
+import nodream.nodream.NoDreams;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -35,11 +34,11 @@ public class NoDreamReload implements CommandExecutor {
             } else if (args[0].equalsIgnoreCase("SLEEPING") && args[0] != null) {
                 if (args[1].equalsIgnoreCase("TRUE") && args[1] != null) {
                     NoDreamConfig.setEnableSleeping(true);
-                    ((NoDream) plugin_).RegisterEvent();
+                    ((NoDreams) plugin_).RegisterEvent();
                     printSleepingMsg(sender, "TRUE");
                 } else if (args[1].equalsIgnoreCase("FALSE") && args[1] != null) {
                     NoDreamConfig.setEnableSleeping(false);
-                    ((NoDream) plugin_).RegisterEvent();
+                    ((NoDreams) plugin_).RegisterEvent();
                     printSleepingMsg(sender, "FALSE");
                 } else {
                     sender.sendMessage(ChatColor.GRAY +NoDreamConfig.getValuesAre()+" TRUE/FALSE");
@@ -47,11 +46,11 @@ public class NoDreamReload implements CommandExecutor {
             } else if (args[0].equalsIgnoreCase("PHANTOMS") && args[0] != null) {
                 if (args[1].equalsIgnoreCase("TRUE") && args[1] != null) {
                     NoDreamConfig.setNoPhantoms(false);
-                    ((NoDream) plugin_).RegisterEvent();
+                    ((NoDreams) plugin_).RegisterEvent();
                     printPhantomsMsg(sender, "TRUE");
                 } else if (args[1].equalsIgnoreCase("FALSE") && args[1] != null) {
                     NoDreamConfig.setNoPhantoms(true);
-                    ((NoDream) plugin_).RegisterEvent();
+                    ((NoDreams) plugin_).RegisterEvent();
                     printPhantomsMsg(sender, "FALSE");
                 } else {
                     sender.sendMessage(ChatColor.GRAY+NoDreamConfig.getValuesAre()+" TRUE/FALSE");
