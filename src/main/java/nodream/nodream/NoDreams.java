@@ -36,7 +36,7 @@ public final class NoDreams extends JavaPlugin {
 
     public void RegisterEvent() {
 
-        HandlerList.unregisterAll();
+        HandlerList.unregisterAll(this);
 
         if(NoDreamConfig.isEnableSleeping()) {
             Bukkit.getPluginManager().registerEvents(sleep, this);
