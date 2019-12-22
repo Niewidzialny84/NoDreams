@@ -51,8 +51,8 @@ public class NoDreamConfig {
             playersPercentage = 50;
         }
 
-        noPhantoms = config_.getBoolean("noPhantoms",true);
-        mobName = config_.getString("mobName", "ENDERMAN");
+        noPhantoms = config_.getBoolean("noPhantoms",false);
+        mobName = config_.getString("mobName", "GHAST");
         reloadMsg = config_.getString("reloadMsg", "Config has been reloaded");
 
         valuesAre = config_.getString("valuesAre", "Values are");

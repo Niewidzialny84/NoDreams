@@ -13,10 +13,11 @@ newDayMsg: "New day has come!"
 playersPercentage: 50
 
 #Phantoms spawning; Means spawns if already existing will not vanish
-noPhantoms: true
-#Mob that will now drop phantom membrane when killed. Default is ENDERMAN
+#In 1.15 is a gamerule which can work similar way.
+noPhantoms: false
+#Mob that will now drop phantom membrane when killed. Default is GHAST
 #Avaible options ENDERMAN ZOMBIE SKELETON CREEPER SPIDER GHAST GUARDIAN PIG_ZOMBIE PILLAGER BLAZE DROWNED
-mobName: ENDERMAN
+mobName: GHAST
 
 #Command messages
 #When finished reloading config file
