@@ -1,4 +1,4 @@
-Minecraft plugin for version 1.14.
+Minecraft plugin for version 1.14-1.16.
 
 Allow players to skip the night/thunder with less people sleeping.
 
