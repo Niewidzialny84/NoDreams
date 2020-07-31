@@ -1,4 +1,4 @@
-package nodream.nodream.Config;
+package nodream.nodream.config;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

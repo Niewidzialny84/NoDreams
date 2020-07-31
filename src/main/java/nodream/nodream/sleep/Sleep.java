@@ -1,6 +1,6 @@
-package nodream.nodream.Sleep;
+package nodream.nodream.sleep;
 
-import nodream.nodream.Config.NoDreamConfig;
+import nodream.nodream.config.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -31,14 +31,14 @@ public class Sleep implements Listener {
 
             countPlayers(e.getPlayer(),1);
 
-            if (currentPlayersPercentage >= NoDreamConfig.getPlayersPercentage()) {
-                if(NoDreamConfig.isDoDisplayMsg()) {
+            if (currentPlayersPercentage >= Config.getPlayersPercentage()) {
+                if(Config.isDoDisplayMsg()) {
                     displayMessage(e.getPlayer(), 2);
                 }
 
                 timeTask = new TimeSet(e.getPlayer(),plugin_).runTaskLater(plugin_, 100);
 
-            } else if(NoDreamConfig.isDoDisplayMsg()) {
+            } else if(Config.isDoDisplayMsg()) {
                 displayMessage(e.getPlayer(),0);
             }
         }
@@ -49,7 +49,7 @@ public class Sleep implements Listener {
 
         countPlayers(e.getPlayer(),0);
 
-        if (currentPlayersPercentage < NoDreamConfig.getPlayersPercentage()) {
+        if (currentPlayersPercentage < Config.getPlayersPercentage()) {
             if(timeTask != null) {
                 timeTask.cancel();
                // System.out.println("cancel");
@@ -57,14 +57,14 @@ public class Sleep implements Listener {
            // System.out.println("less");
         }
 
-        if(NoDreamConfig.isDoDisplayMsg()) {
+        if(Config.isDoDisplayMsg()) {
             displayMessage(e.getPlayer(),1);
         }
     }
 
     private int playersNeededPercentage() {
         currentPlayersPercentage = ((float) playersSleeping / (float) playersMax * 100);
-        return (int)Math.ceil(((NoDreamConfig.getPlayersPercentage() - currentPlayersPercentage) * playersMax)/ 100);
+        return (int)Math.ceil(((Config.getPlayersPercentage() - currentPlayersPercentage) * playersMax)/ 100);
     }
 
     private void countPlayers(Player p,int startingValue) {
@@ -95,22 +95,22 @@ public class Sleep implements Listener {
             switch (msgValue) {
                 case 0:
                     if(playersNeededPercentage() == 1) {
-                        plugin_.getServer().broadcastMessage(c2 + p.getDisplayName() + c + " "+ NoDreamConfig.getIsSleepingMsg()+ " " + c2 + playersNeededPercentage() + " "+NoDreamConfig.getPlayerNeeded());
+                        plugin_.getServer().broadcastMessage(c2 + p.getDisplayName() + c + " "+ Config.getIsSleepingMsg()+ " " + c2 + playersNeededPercentage() + " "+ Config.getPlayerNeeded());
                     } else {
-                        plugin_.getServer().broadcastMessage(c2 +p.getDisplayName()  + c+ " "+ NoDreamConfig.getIsSleepingMsg()+ " " + c2 + playersNeededPercentage() + " "+NoDreamConfig.getPlayersNeeded());
+                        plugin_.getServer().broadcastMessage(c2 +p.getDisplayName()  + c+ " "+ Config.getIsSleepingMsg()+ " " + c2 + playersNeededPercentage() + " "+ Config.getPlayersNeeded());
                     }
                     break;
                 case 1:
                     if(playersNeededPercentage() == 1) {
-                        plugin_.getServer().broadcastMessage(c2 +p.getDisplayName()  + c+ " " + NoDreamConfig.getIsNotSleepingMsg() + " " + c2 + playersNeededPercentage() + " " + NoDreamConfig.getPlayerNeeded());
+                        plugin_.getServer().broadcastMessage(c2 +p.getDisplayName()  + c+ " " + Config.getIsNotSleepingMsg() + " " + c2 + playersNeededPercentage() + " " + Config.getPlayerNeeded());
                     } else if (playersNeededPercentage() == 0) {
-                        plugin_.getServer().broadcastMessage(c2 +p.getDisplayName() + c + " "+NoDreamConfig.getIsNotSleepingMsg());
+                        plugin_.getServer().broadcastMessage(c2 +p.getDisplayName() + c + " "+ Config.getIsNotSleepingMsg());
                     } else {
-                        plugin_.getServer().broadcastMessage(c2 +p.getDisplayName()  + c+ " " + NoDreamConfig.getIsNotSleepingMsg() + " " + c2 + playersNeededPercentage() + " " + NoDreamConfig.getPlayersNeeded());
+                        plugin_.getServer().broadcastMessage(c2 +p.getDisplayName()  + c+ " " + Config.getIsNotSleepingMsg() + " " + c2 + playersNeededPercentage() + " " + Config.getPlayersNeeded());
                     }
                     break;
                 case 2:
-                    plugin_.getServer().broadcastMessage(c2 +p.getDisplayName() + c + " "+ NoDreamConfig.getIsSleepingMsg());
+                    plugin_.getServer().broadcastMessage(c2 +p.getDisplayName() + c + " "+ Config.getIsSleepingMsg());
                     break;
                 default:
                     break;

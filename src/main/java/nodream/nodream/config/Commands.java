@@ -1,4 +1,4 @@
-package nodream.nodream.Config;
+package nodream.nodream.config;
 
 import nodream.nodream.NoDreams;
 import org.bukkit.ChatColor;
@@ -9,12 +9,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 
-public class NoDreamReload implements CommandExecutor {
+public class Commands implements CommandExecutor {
 
-    private Plugin plugin_;
+    private Plugin plugin;
 
-    public NoDreamReload(Plugin plugin) {
-        plugin_ = plugin;
+    public Commands(Plugin plugin) {
+        this.plugin = plugin;
     }
 
     @Override
@@ -28,32 +28,32 @@ public class NoDreamReload implements CommandExecutor {
                 }
 
                 if (args[0].equalsIgnoreCase("RELOAD") && args[0] != null) {
-                    plugin_.reloadConfig();
-                    NoDreamConfig.loadConfig(plugin_);
+                    plugin.reloadConfig();
+                    Config.loadConfig(plugin);
                     printReloadMsg(sender);
             } else if (args[0].equalsIgnoreCase("SLEEPING") && args[0] != null) {
                 if (args[1].equalsIgnoreCase("TRUE") && args[1] != null) {
-                    NoDreamConfig.setEnableSleeping(true);
-                    ((NoDreams) plugin_).RegisterEvent();
+                    Config.setEnableSleeping(true);
+                    ((NoDreams) plugin).RegisterEvent();
                     printSleepingMsg(sender, "TRUE");
                 } else if (args[1].equalsIgnoreCase("FALSE") && args[1] != null) {
-                    NoDreamConfig.setEnableSleeping(false);
-                    ((NoDreams) plugin_).RegisterEvent();
+                    Config.setEnableSleeping(false);
+                    ((NoDreams) plugin).RegisterEvent();
                     printSleepingMsg(sender, "FALSE");
                 } else {
-                    sender.sendMessage(ChatColor.GRAY +NoDreamConfig.getValuesAre()+" TRUE/FALSE");
+                    sender.sendMessage(ChatColor.GRAY + Config.getValuesAre()+" TRUE/FALSE");
                 }
             } else if (args[0].equalsIgnoreCase("PHANTOMS") && args[0] != null) {
                 if (args[1].equalsIgnoreCase("TRUE") && args[1] != null) {
-                    NoDreamConfig.setNoPhantoms(false);
-                    ((NoDreams) plugin_).RegisterEvent();
+                    Config.setNoPhantoms(false);
+                    ((NoDreams) plugin).RegisterEvent();
                     printPhantomsMsg(sender, "TRUE");
                 } else if (args[1].equalsIgnoreCase("FALSE") && args[1] != null) {
-                    NoDreamConfig.setNoPhantoms(true);
-                    ((NoDreams) plugin_).RegisterEvent();
+                    Config.setNoPhantoms(true);
+                    ((NoDreams) plugin).RegisterEvent();
                     printPhantomsMsg(sender, "FALSE");
                 } else {
-                    sender.sendMessage(ChatColor.GRAY+NoDreamConfig.getValuesAre()+" TRUE/FALSE");
+                    sender.sendMessage(ChatColor.GRAY+ Config.getValuesAre()+" TRUE/FALSE");
                 }
             } else if(args[0].equalsIgnoreCase("HELP")) {
                     printHelpMsg(sender);
@@ -65,22 +65,22 @@ public class NoDreamReload implements CommandExecutor {
 
     private void printHelpMsg(CommandSender sender) {
         sender.sendMessage(ChatColor.DARK_AQUA+"NoDreams Help:");
-        sender.sendMessage(ChatColor.DARK_AQUA+"/nodreams reload"+ChatColor.GRAY+" - "+NoDreamConfig.getReloadHemlMsg());
-        sender.sendMessage(ChatColor.DARK_AQUA+"/nodreams sleeping <true/false>"+ChatColor.GRAY+" - "+NoDreamConfig.getSleepingHelpMsg());
-        sender.sendMessage(ChatColor.DARK_AQUA+"/nodreams phantoms <true/false>"+ChatColor.GRAY+" - "+NoDreamConfig.getPhantomsHelpMsg());
-        sender.sendMessage(ChatColor.GRAY+NoDreamConfig.getWarningHelpMsg());
+        sender.sendMessage(ChatColor.DARK_AQUA+"/nodreams reload"+ChatColor.GRAY+" - "+ Config.getReloadHemlMsg());
+        sender.sendMessage(ChatColor.DARK_AQUA+"/nodreams sleeping <true/false>"+ChatColor.GRAY+" - "+ Config.getSleepingHelpMsg());
+        sender.sendMessage(ChatColor.DARK_AQUA+"/nodreams phantoms <true/false>"+ChatColor.GRAY+" - "+ Config.getPhantomsHelpMsg());
+        sender.sendMessage(ChatColor.GRAY+ Config.getWarningHelpMsg());
     }
 
     private void printReloadMsg(CommandSender sender) {
-        sender.sendMessage(ChatColor.GRAY+NoDreamConfig.getReloadMsg());
+        sender.sendMessage(ChatColor.GRAY+ Config.getReloadMsg());
     }
 
     private void printSleepingMsg(CommandSender sender, String value) {
-        sender.sendMessage(ChatColor.GRAY+NoDreamConfig.getSleepingSetMsg()+" "+value);
+        sender.sendMessage(ChatColor.GRAY+ Config.getSleepingSetMsg()+" "+value);
     }
 
     private void printPhantomsMsg(CommandSender sender, String value) {
-        sender.sendMessage(ChatColor.GRAY+NoDreamConfig.getPhantomsSetMsg()+" "+value);
+        sender.sendMessage(ChatColor.GRAY+ Config.getPhantomsSetMsg()+" "+value);
     }
 
 }

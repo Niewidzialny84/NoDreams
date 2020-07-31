@@ -1,4 +1,4 @@
-package nodream.nodream.Config;
+package nodream.nodream.config;
 
 
 import nodream.nodream.NoDreams;
@@ -8,7 +8,7 @@ import org.bukkit.plugin.Plugin;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NoDreamConfig {
+public class Config {
 
     private static boolean enableSleeping;
     private static boolean doDisplayMsg;
@@ -36,32 +36,32 @@ public class NoDreamConfig {
     private final static List<String> subCommands = new ArrayList<>();
     private final static List<String> subCommandsBool = new ArrayList<>();
 
-    private static void load(FileConfiguration config_) {
-        enableSleeping = config_.getBoolean("enableSleeping",true);
-        isSleepingMsg = config_.getString("isSleepingMsg", "is sleeping.");
-        isNotSleepingMsg = config_.getString("isNotSleepingMsg", "is not sleeping.");
-        playersNeeded = config_.getString("playersNeeded", "players needed");
-        playerNeeded = config_.getString("playerNeeded", "player needed");
-        doDisplayMsg = config_.getBoolean("doDisplayMsg", true);
-        newDayMsg = config_.getString("newDayMsg", "New day has come!");
+    private static void load(FileConfiguration config) {
+        enableSleeping = config.getBoolean("enableSleeping",true);
+        isSleepingMsg = config.getString("isSleepingMsg", "is sleeping.");
+        isNotSleepingMsg = config.getString("isNotSleepingMsg", "is not sleeping.");
+        playersNeeded = config.getString("playersNeeded", "players needed");
+        playerNeeded = config.getString("playerNeeded", "player needed");
+        doDisplayMsg = config.getBoolean("doDisplayMsg", true);
+        newDayMsg = config.getString("newDayMsg", "New day has come!");
 
-        playersPercentage = config_.getInt("playersPercentage", 50);
+        playersPercentage = config.getInt("playersPercentage", 50);
 
         if (playersPercentage > 100 || playersPercentage < 0) {
             playersPercentage = 50;
         }
 
-        noPhantoms = config_.getBoolean("noPhantoms",false);
-        mobName = config_.getString("mobName", "GHAST");
-        reloadMsg = config_.getString("reloadMsg", "Config has been reloaded");
+        noPhantoms = config.getBoolean("noPhantoms",false);
+        mobName = config.getString("mobName", "GHAST");
+        reloadMsg = config.getString("reloadMsg", "Config has been reloaded");
 
-        valuesAre = config_.getString("valuesAre", "Values are");
-        sleepingSetMsg = config_.getString("sleepingSetMsg", "Sleeping set to");
-        phantomsSetMsg = config_.getString("phantomsSetMsg", "Phantoms set to");
-        reloadHelpMsg = config_.getString("reloadHelpMsg", "reloads plugin including config data");
-        sleepingHelpMsg = config_.getString("sleepingHelpMsg", "enables/disables sleeping feature");
-        phantomsHelpMsg = config_.getString("phantomsHelpMsg",  "enables/disables phantoms spawning");
-        warningHelpMsg = config_.getString("warningHelpMsg", "Warning: Changing sleeping or phantoms will have no effect after restar/reload");
+        valuesAre = config.getString("valuesAre", "Values are");
+        sleepingSetMsg = config.getString("sleepingSetMsg", "Sleeping set to");
+        phantomsSetMsg = config.getString("phantomsSetMsg", "Phantoms set to");
+        reloadHelpMsg = config.getString("reloadHelpMsg", "reloads plugin including config data");
+        sleepingHelpMsg = config.getString("sleepingHelpMsg", "enables/disables sleeping feature");
+        phantomsHelpMsg = config.getString("phantomsHelpMsg",  "enables/disables phantoms spawning");
+        warningHelpMsg = config.getString("warningHelpMsg", "Warning: Changing sleeping or phantoms will have no effect after restar/reload");
 
         createSubCommandList();
         createSubCommandBoolList();
@@ -92,11 +92,11 @@ public class NoDreamConfig {
     }
 
     public static void setEnableSleeping(boolean enableSleeping) {
-        NoDreamConfig.enableSleeping = enableSleeping;
+        Config.enableSleeping = enableSleeping;
     }
 
     public static void setNoPhantoms(boolean noPhantoms) {
-        NoDreamConfig.noPhantoms = noPhantoms;
+        Config.noPhantoms = noPhantoms;
     }
 
     public static List<String> getSubCommands() {

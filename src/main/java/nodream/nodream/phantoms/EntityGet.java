@@ -1,14 +1,13 @@
-package nodream.nodream.Phantoms;
+package nodream.nodream.phantoms;
 
-import nodream.nodream.Config.NoDreamConfig;
+import nodream.nodream.config.Config;
 import org.bukkit.entity.EntityType;
 import org.bukkit.plugin.Plugin;
 
 public class EntityGet {
 
     public static EntityType getEntityTypeConfig(Plugin plugin) {
-
-        String name = NoDreamConfig.getMobName();
+        String name = Config.getMobName();
         switch (name) {
             case "ENDERMAN":
                 mobInfo(plugin,name);
@@ -31,9 +30,6 @@ public class EntityGet {
             case"GUARDIAN":
                 mobInfo(plugin,name);
                 return EntityType.GUARDIAN;
-            case"PIG_ZOMBIE":
-                mobInfo(plugin,name);
-                return EntityType.PIG_ZOMBIE;
             case"PILLAGER":
                 mobInfo(plugin,name);
                 return EntityType.PILLAGER;

@@ -1,5 +1,6 @@
-package nodream.nodream.Phantoms;
+package nodream.nodream.phantoms;
 
+import nodream.nodream.NoDreams;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
@@ -9,16 +10,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
 
 import java.util.Random;
 
 public class Phantoms implements Listener {
-    private Plugin plugin_;
     private EntityType mobDrop;
+    private NoDreams plugin;
 
-    public Phantoms(Plugin plugin) {
-        plugin_ = plugin;
+    public Phantoms(NoDreams plugin) {
+        this.plugin = plugin;
     }
 
     @EventHandler
@@ -26,9 +26,7 @@ public class Phantoms implements Listener {
         if(e.getEntityType() == EntityType.PHANTOM ) {
             if(e.getEntity().getWorld().getEnvironment() == World.Environment.NORMAL) {
                 e.getEntity().remove();
-                //e.setCancelled(true);
-                // && e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.NATURAL
-                //idk cant test dis out
+
             }
         }
     }
@@ -44,7 +42,7 @@ public class Phantoms implements Listener {
                 if (a == 0) {
                     e.getDrops().add(new ItemStack(Material.PHANTOM_MEMBRANE, randomInt(0, 2)));
                 } else {
-                    e.getDrops().add(new ItemStack(Material.PHANTOM_MEMBRANE, randomInt(0 + a, 3 + a)));
+                    e.getDrops().add(new ItemStack(Material.PHANTOM_MEMBRANE, randomInt(a, 3 + a)));
                 }
             } else {
                 //no drop if not player
@@ -58,8 +56,7 @@ public class Phantoms implements Listener {
         }
     }
 
-    public void setMobDrop(Plugin plugin) {
-        plugin_ = plugin;
+    public void setMobDrop() {
         mobDrop =  EntityGet.getEntityTypeConfig(plugin);
     }
 

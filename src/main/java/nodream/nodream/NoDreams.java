@@ -1,11 +1,11 @@
 package nodream.nodream;
 
-import nodream.nodream.Config.MetricsLite;
-import nodream.nodream.Config.NoDreamConfig;
-import nodream.nodream.Config.NoDreamReload;
-import nodream.nodream.Config.NoDreamTabComplete;
-import nodream.nodream.Phantoms.Phantoms;
-import nodream.nodream.Sleep.Sleep;
+import nodream.nodream.config.MetricsLite;
+import nodream.nodream.config.Config;
+import nodream.nodream.config.Commands;
+import nodream.nodream.config.CommandsTab;
+import nodream.nodream.phantoms.Phantoms;
+import nodream.nodream.sleep.Sleep;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -23,10 +23,10 @@ public final class NoDreams extends JavaPlugin {
 
         sleep = new Sleep(this);
         phantoms = new Phantoms(this);
-        NoDreamConfig.loadConfig(this);
+        Config.loadConfig(this);
 
-        this.getCommand("nodreams").setExecutor(new NoDreamReload(this));
-        this.getCommand("nodreams").setTabCompleter(new NoDreamTabComplete());
+        this.getCommand("nodreams").setExecutor(new Commands(this));
+        this.getCommand("nodreams").setTabCompleter(new CommandsTab());
     }
 
     @Override
@@ -38,17 +38,17 @@ public final class NoDreams extends JavaPlugin {
 
         HandlerList.unregisterAll(this);
 
-        if(NoDreamConfig.isEnableSleeping()) {
+        if(Config.isEnableSleeping()) {
             Bukkit.getPluginManager().registerEvents(sleep, this);
             this.getLogger().info("NoDreams Sleeping is Enabled");
         } else {
             this.getLogger().info("NoDreams Sleeping is Disabled");
         }
 
-        if(NoDreamConfig.isNoPhantoms()) {
+        if(Config.isNoPhantoms()) {
         Bukkit.getPluginManager().registerEvents(phantoms,this);
             this.getLogger().info("Phantoms spawning is Disabled");
-            phantoms.setMobDrop(this);
+            phantoms.setMobDrop();
         } else {
             this.getLogger().info("Phantoms spawning is Enabled");
         }

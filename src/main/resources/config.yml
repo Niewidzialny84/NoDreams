@@ -2,7 +2,7 @@
 enableSleeping: true
 #Display of sleeping message
 doDisplayMsg: true
-#Message in form "<Player> isSleepingMsg. <12/1> playersNeeded/playerNeeded.
+#Message in form "<Player> isSleepingMsg. <12/1> playersNeeded/playerNeeded".
 isSleepingMsg: "is sleeping"
 isNotSleepingMsg: "is not sleeping"
 playersNeeded: "players needed"
@@ -16,7 +16,7 @@ playersPercentage: 50
 #In 1.15 is a gamerule which can work similar way.
 noPhantoms: false
 #Mob that will now drop phantom membrane when killed. Default is GHAST
-#Avaible options ENDERMAN ZOMBIE SKELETON CREEPER SPIDER GHAST GUARDIAN PIG_ZOMBIE PILLAGER BLAZE DROWNED
+#Avaible options ENDERMAN ZOMBIE SKELETON CREEPER SPIDER GHAST GUARDIAN PILLAGER BLAZE DROWNED
 mobName: GHAST
 
 #Command messages
