@@ -9,6 +9,8 @@ playersNeeded: "players needed"
 playerNeeded: "player needed"
 #Message when you skip night
 newDayMsg: "New day has come!"
+#Animated sun when new day arrives
+newDaySun: true
 #Percentage of players needed to make a day. 100 is max means all players. 0 is min means at least 1 player;
 playersPercentage: 50
 

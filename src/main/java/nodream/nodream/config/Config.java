@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Config {
-
     private static boolean enableSleeping;
     private static boolean doDisplayMsg;
     private static String isSleepingMsg;
@@ -17,6 +16,7 @@ public class Config {
     private static String playersNeeded;
     private static String playerNeeded;
     private static String newDayMsg;
+    private static boolean newDaySun;
     private static int playersPercentage;
 
     private static boolean noPhantoms;
@@ -44,6 +44,7 @@ public class Config {
         playerNeeded = config.getString("playerNeeded", "player needed");
         doDisplayMsg = config.getBoolean("doDisplayMsg", true);
         newDayMsg = config.getString("newDayMsg", "New day has come!");
+        newDaySun = config.getBoolean("newDaySun",true);
 
         playersPercentage = config.getInt("playersPercentage", 50);
 
@@ -175,5 +176,8 @@ public class Config {
         return warningHelpMsg;
     }
 
+    public static boolean isNewDaySun() {
+        return newDaySun;
+    }
 }
 

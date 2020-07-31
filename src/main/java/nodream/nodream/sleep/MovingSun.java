@@ -9,12 +9,13 @@ public class MovingSun extends BukkitRunnable {
     private Player player;
     private int repeat;
     private int max;
+
     public MovingSun (Plugin plugin, Player player, long time) {
         this.plugin = plugin;
         this.player = player;
         repeat = 0;
         max = (int)Math.ceil( ((float)time)/200);
-        runTaskTimer(plugin, 0 ,1);
+        runTaskTimer(plugin, 0 ,0);
     }
 
     @Override

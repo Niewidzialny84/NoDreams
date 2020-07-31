@@ -9,41 +9,56 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class TimeSet extends BukkitRunnable {
 
-    private Player p;
+    private Player player;
     private Plugin plugin;
+    private boolean isMoving;
 
-    TimeSet(Player player,Plugin plugin) {
-        p = player;
+    TimeSet(Plugin plugin,Player player) {
+        this.player = player;
         this.plugin = plugin;
+        isMoving = false;
     }
 
     @Override
     public void run() {
-        long time = p.getWorld().getTime() % 24000;
-        if (time >= 12000 && time <= 24000 && !p.getWorld().isThundering()) {
-            if(p.getWorld().hasStorm()) {
-                p.getWorld().setWeatherDuration(1);
+        long time = player.getWorld().getTime() % 24000;
+        if (time >= 12000 && time <= 24000 && !player.getWorld().isThundering()) {
+            if(player.getWorld().hasStorm() || player.getWorld().getWeatherDuration() > 2) {
+                player.getWorld().setWeatherDuration(1);
             }
-            //p.getWorld().setTime(p.getWorld().getTime() + (24000 - time));
-            new MovingSun(plugin,p,24000-time);
+
+            if(Config.isNewDaySun()) {
+                new MovingSun(plugin, player,24000-time);
+            } else {
+                player.getWorld().setTime(player.getWorld().getTime() + (24000 - time));
+            }
 
             newDayMsg();
         }
 
-        if (p.getWorld().isThundering()) {
+        if (player.getWorld().isThundering()) {
             if (time >= 12000 && time <= 24000) {
-                //p.getWorld().setTime(p.getWorld().getTime() + (24000 - time));
-                new MovingSun(plugin,p,24000-time);
+                if(Config.isNewDaySun()) {
+                    new MovingSun(plugin, player,24000-time);
+                } else {
+                    player.getWorld().setTime(player.getWorld().getTime() + (24000 - time));
+                }
             }
-            p.getWorld().setThundering(false);
-            p.getWorld().setWeatherDuration(1);
+            player.getWorld().setThundering(false);
+            player.getWorld().setWeatherDuration(1);
             newDayMsg();
         }
+    }
+
+    public boolean isSunMoving() {
+        return isMoving;
     }
 
     private void newDayMsg() {
-        if(Config.isDoDisplayMsg()) plugin.getServer().broadcastMessage(ChatColor.DARK_AQUA + Config.getNewDayMsg());
+        isMoving = true;
+        if(Config.isDoDisplayMsg()) {
+            plugin.getServer().broadcastMessage(ChatColor.DARK_AQUA + Config.getNewDayMsg());
+        }
     }
-
 }
 

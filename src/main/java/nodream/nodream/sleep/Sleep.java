@@ -21,6 +21,7 @@ public class Sleep implements Listener {
     private Plugin plugin;
 
     private BukkitTask timeTask;
+    private TimeSet timeSet;
 
     public Sleep(Plugin plugin) {
         this.plugin = plugin;
@@ -37,7 +38,8 @@ public class Sleep implements Listener {
                     displayMessage(e.getPlayer(), 2);
                 }
 
-                timeTask = new TimeSet(e.getPlayer(), plugin).runTaskLater(plugin, 100);
+                timeSet = new TimeSet(plugin,e.getPlayer());
+                timeTask = timeSet. runTaskLater(plugin, 100);
 
             } else if(Config.isDoDisplayMsg()) {
                 displayMessage(e.getPlayer(),0);
@@ -50,14 +52,12 @@ public class Sleep implements Listener {
 
         countPlayers(e.getPlayer(),0);
 
-        if (currentPlayersPercentage < Config.getPlayersPercentage()) {
-            if(timeTask != null) {
-                timeTask.cancel();
-            }
+        if (currentPlayersPercentage < Config.getPlayersPercentage() && timeTask != null) {
+            timeTask.cancel();
         }
 
-        if(Config.isDoDisplayMsg()) {
-            displayMessage(e.getPlayer(),1);
+        if(Config.isDoDisplayMsg() && !(timeSet != null && timeSet.isSunMoving())) {
+                displayMessage(e.getPlayer(),1);
         }
     }
 
