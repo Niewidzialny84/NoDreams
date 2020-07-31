@@ -3,6 +3,7 @@ package nodream.nodream.sleep;
 import nodream.nodream.config.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,12 +18,12 @@ public class Sleep implements Listener {
     private int playersMax = 0;
     private long time = 0;
     private float currentPlayersPercentage;
-    private Plugin plugin_;
+    private Plugin plugin;
 
     private BukkitTask timeTask;
 
     public Sleep(Plugin plugin) {
-        plugin_ = plugin;
+        this.plugin = plugin;
     }
 
     @EventHandler
@@ -36,7 +37,7 @@ public class Sleep implements Listener {
                     displayMessage(e.getPlayer(), 2);
                 }
 
-                timeTask = new TimeSet(e.getPlayer(),plugin_).runTaskLater(plugin_, 100);
+                timeTask = new TimeSet(e.getPlayer(), plugin).runTaskLater(plugin, 100);
 
             } else if(Config.isDoDisplayMsg()) {
                 displayMessage(e.getPlayer(),0);
@@ -52,9 +53,7 @@ public class Sleep implements Listener {
         if (currentPlayersPercentage < Config.getPlayersPercentage()) {
             if(timeTask != null) {
                 timeTask.cancel();
-               // System.out.println("cancel");
             }
-           // System.out.println("less");
         }
 
         if(Config.isDoDisplayMsg()) {
@@ -72,7 +71,7 @@ public class Sleep implements Listener {
         int playersMax_ = 0;
 
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-            if(player.getWorld().getEnvironment() == World.Environment.NORMAL) {
+            if(player.getWorld().getEnvironment() == World.Environment.NORMAL && (player.getGameMode().equals(GameMode.SURVIVAL) || player.getGameMode().equals(GameMode.ADVENTURE))) {
                 if (player.isSleeping() && p != player) playersSleeping_++;
                 playersMax_++;
             }
@@ -94,23 +93,25 @@ public class Sleep implements Listener {
         if ((p.getWorld().isThundering() || time >= 12000 && time <= 24000)) {
             switch (msgValue) {
                 case 0:
+                    String msg = c2 + p.getDisplayName() + c + " "+ Config.getIsSleepingMsg()+ " " + c2 + playersNeededPercentage() + " ";
                     if(playersNeededPercentage() == 1) {
-                        plugin_.getServer().broadcastMessage(c2 + p.getDisplayName() + c + " "+ Config.getIsSleepingMsg()+ " " + c2 + playersNeededPercentage() + " "+ Config.getPlayerNeeded());
+                        plugin.getServer().broadcastMessage(msg+ Config.getPlayerNeeded());
                     } else {
-                        plugin_.getServer().broadcastMessage(c2 +p.getDisplayName()  + c+ " "+ Config.getIsSleepingMsg()+ " " + c2 + playersNeededPercentage() + " "+ Config.getPlayersNeeded());
+                        plugin.getServer().broadcastMessage(msg+ Config.getPlayersNeeded());
                     }
                     break;
                 case 1:
+                    String msgnot = c2 +p.getDisplayName()  + c+ " " + Config.getIsNotSleepingMsg() + " " + c2 + playersNeededPercentage() + " ";
                     if(playersNeededPercentage() == 1) {
-                        plugin_.getServer().broadcastMessage(c2 +p.getDisplayName()  + c+ " " + Config.getIsNotSleepingMsg() + " " + c2 + playersNeededPercentage() + " " + Config.getPlayerNeeded());
+                        plugin.getServer().broadcastMessage(msgnot + Config.getPlayerNeeded());
                     } else if (playersNeededPercentage() == 0) {
-                        plugin_.getServer().broadcastMessage(c2 +p.getDisplayName() + c + " "+ Config.getIsNotSleepingMsg());
+                        plugin.getServer().broadcastMessage(c2 +p.getDisplayName() + c + " "+ Config.getIsNotSleepingMsg());
                     } else {
-                        plugin_.getServer().broadcastMessage(c2 +p.getDisplayName()  + c+ " " + Config.getIsNotSleepingMsg() + " " + c2 + playersNeededPercentage() + " " + Config.getPlayersNeeded());
+                        plugin.getServer().broadcastMessage(msgnot + Config.getPlayersNeeded());
                     }
                     break;
                 case 2:
-                    plugin_.getServer().broadcastMessage(c2 +p.getDisplayName() + c + " "+ Config.getIsSleepingMsg());
+                    plugin.getServer().broadcastMessage(c2 +p.getDisplayName() + c + " "+ Config.getIsSleepingMsg());
                     break;
                 default:
                     break;
